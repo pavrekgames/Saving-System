@@ -5,8 +5,11 @@ using System.Linq;
 
 public class SaveLoadDataManager : MonoBehaviour
 {
+    [SerializeField] private Cloud cloud;
+
     [SerializeField] private string fileName;
     [SerializeField] private bool useEncryption = false;
+    [SerializeField] private bool loadFromCloud = false;
 
     private GameData gameData;
     private FileDataHandler fileDataHandler;
@@ -52,13 +55,15 @@ public class SaveLoadDataManager : MonoBehaviour
         }
 
         fileDataHandler.Save(gameData, selectedProfileId);
-
+        cloud.SaveToCloud(gameData, selectedProfileId);
     }
 
     public void LoadGame()
     {
         gameData = fileDataHandler.Load(selectedProfileId);
 
+        if(loadFromCloud) { gameData = cloud.LoadFromCloud(selectedProfileId); }
+        
         if(gameData == null) { NewGame(); }
 
         foreach(ISaveLoadData saveLoadDataObject in saveLoadDataObjects)
