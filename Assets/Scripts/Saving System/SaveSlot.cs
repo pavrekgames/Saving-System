@@ -10,7 +10,7 @@ public class SaveSlot : MonoBehaviour
 
     public void SetData(GameData data)
     {
-        if(data == null)
+        if (data == null)
         {
             slotNameText.text = "EMPTY";
         }

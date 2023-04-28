@@ -23,16 +23,16 @@ public class GameData
         //general
         coinsAmount = 0;
 
-        // Player
+        //player
         this.playerName = "NonName";
         this.playerLevel = 1;
         this.playerHealth = 100f;
         this.playerPosition = new Vector3(0, 0, 0);
         this.playerRotation = new Quaternion(0, 0, 0, 0);
 
-        //Objects
+        //objects
         coinsCollected = new SerializableDictionary<string, bool>();
 
     }
-  
+
 }

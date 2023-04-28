@@ -6,21 +6,18 @@ public class Cloud : MonoBehaviour
 {
     Dictionary<string, GameData> profilesData;
 
-    private void Start()
-    {
-        profilesData = new Dictionary<string, GameData>();
-    }
+    private void Start() => profilesData = new Dictionary<string, GameData>();
 
     public void SaveToCloud(GameData gameData, string profileId)
     {
-        if(profilesData.ContainsKey(profileId))
+        if (profilesData.ContainsKey(profileId))
         {
             profilesData[profileId] = gameData;
         }
         else
         {
             profilesData.Add(profileId, gameData);
-        }  
+        }
     }
 
     public GameData LoadFromCloud(string profileId)
@@ -35,7 +32,5 @@ public class Cloud : MonoBehaviour
         {
             return null;
         }
-        
     }
-
 }

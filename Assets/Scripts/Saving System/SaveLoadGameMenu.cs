@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SaveLoadGameMenu : MonoBehaviour
 {
-
     [SerializeField] private Canvas loadGameCanvas;
     [SerializeField] private SaveSlot[] saveSlots;
     [SerializeField] private TextMeshProUGUI saveLoadStateText;
@@ -26,7 +25,7 @@ public class SaveLoadGameMenu : MonoBehaviour
 
         Dictionary<string, GameData> profilesData = SaveLoadDataManager.instance.GetAllProfilesData();
 
-        foreach(SaveSlot saveSlot in saveSlots)
+        foreach (SaveSlot saveSlot in saveSlots)
         {
             GameData profileData = null;
             profilesData.TryGetValue(saveSlot.GetProfileId(), out profileData);
@@ -62,9 +61,6 @@ public class SaveLoadGameMenu : MonoBehaviour
         }
     }
 
-    public void BackButton()
-    {
-        loadGameCanvas.enabled = false;
-    }
+    public void BackButton() => loadGameCanvas.enabled = false;
 
 }

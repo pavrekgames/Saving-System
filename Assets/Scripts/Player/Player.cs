@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ISaveLoadData
 {
-
     [SerializeField] private Transform player;
 
     public float health = 100;
+    public string playerName;
+    public int playerLevel = 1;
+
     [HideInInspector] public Vector3 playerPosition;
     [HideInInspector] public Quaternion playerRotation;
 
@@ -16,11 +18,6 @@ public class Player : MonoBehaviour, ISaveLoadData
     [SerializeField] private float rotationSpeed = 3f;
 
     public static event Action OnPlayerStatsUpdated;
-   
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -34,33 +31,11 @@ public class Player : MonoBehaviour, ISaveLoadData
 
     private void Movement()
     {
-        Vector2 inputVector = new Vector2(0, 0);
+        float moveForwardBack = Input.GetAxisRaw("Vertical");
+        float moveLeftRight = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            inputVector.y = +1;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            inputVector.y = -1;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            inputVector.x = -1;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            inputVector.x = +1;
-        }
-
-        inputVector = inputVector.normalized;
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+        Vector3 moveDir = new Vector3(moveLeftRight, 0f, moveForwardBack).normalized;
         player.transform.position += moveDir * moveSpeed * Time.deltaTime;
-
         player.transform.forward = Vector3.Slerp(player.transform.forward, moveDir, rotationSpeed * Time.deltaTime);
 
     }
@@ -69,8 +44,6 @@ public class Player : MonoBehaviour, ISaveLoadData
     {
         playerPosition = player.transform.position;
         playerRotation = player.transform.rotation;
-        Debug.Log(player.transform.position);
-        Debug.Log(player.transform.rotation);
         OnPlayerStatsUpdated?.Invoke();
     }
 
@@ -79,7 +52,11 @@ public class Player : MonoBehaviour, ISaveLoadData
     {
         playerPosition = player.transform.position;
         playerRotation = player.transform.rotation;
+
         gameData.playerHealth = health;
+        gameData.playerName = playerName;
+        gameData.playerLevel = playerLevel;
+
         gameData.playerPosition = playerPosition;
         gameData.playerRotation = playerRotation;
     }
@@ -87,12 +64,14 @@ public class Player : MonoBehaviour, ISaveLoadData
     public void LoadGame(GameData gameData)
     {
         health = gameData.playerHealth;
+        playerName = gameData.playerName;
+        playerLevel = gameData.playerLevel;
+
         playerPosition = gameData.playerPosition;
         playerRotation = gameData.playerRotation;
+
         player.transform.position = playerPosition;
         player.transform.rotation = playerRotation;
-        Debug.Log("Loaded");
     }
-
     #endregion
 }

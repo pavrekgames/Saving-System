@@ -5,8 +5,11 @@ using System.Linq;
 
 public class SaveLoadDataManager : MonoBehaviour
 {
+    public static SaveLoadDataManager instance { get; private set; }
+
     [SerializeField] private Cloud cloud;
 
+    [Header("Saving options")]
     [SerializeField] private string fileName;
     [SerializeField] private bool useEncryption = false;
     [SerializeField] private bool loadFromCloud = false;
@@ -14,13 +17,11 @@ public class SaveLoadDataManager : MonoBehaviour
     private GameData gameData;
     private FileDataHandler fileDataHandler;
     private List<ISaveLoadData> saveLoadDataObjects;
-    private string selectedProfileId = "test";
-
-    public static SaveLoadDataManager instance { get; private set; }
+    private string selectedProfileId = "1";
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -42,10 +43,7 @@ public class SaveLoadDataManager : MonoBehaviour
         selectedProfileId = newProfileId;
     }
 
-    public void NewGame()
-    {
-        gameData = new GameData();
-    }
+    public void NewGame() => gameData = new GameData();
 
     public void SaveGame()
     {
@@ -62,15 +60,14 @@ public class SaveLoadDataManager : MonoBehaviour
     {
         gameData = fileDataHandler.Load(selectedProfileId);
 
-        if(loadFromCloud) { gameData = cloud.LoadFromCloud(selectedProfileId); }
-        
-        if(gameData == null) { NewGame(); }
+        if (loadFromCloud) { gameData = cloud.LoadFromCloud(selectedProfileId); }
 
-        foreach(ISaveLoadData saveLoadDataObject in saveLoadDataObjects)
+        if (gameData == null) { NewGame(); }
+
+        foreach (ISaveLoadData saveLoadDataObject in saveLoadDataObjects)
         {
             saveLoadDataObject.LoadGame(gameData);
         }
-        
     }
 
     private List<ISaveLoadData> FindAllSaveLoadDataObjecs()

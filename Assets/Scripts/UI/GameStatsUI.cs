@@ -9,12 +9,12 @@ public class GameStatsUI : MonoBehaviour
     [SerializeField] private Player player;
 
     [Header("General Stats")]
-    [SerializeField] private TextMeshProUGUI playerNameText;
-    [SerializeField] private TextMeshProUGUI playerLevelText;
     [SerializeField] private TextMeshProUGUI coinsAmountText;
 
     [Header("Player Stats")]
     [SerializeField] private TextMeshProUGUI playerHealthText;
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private TextMeshProUGUI playerLevelText;
     [SerializeField] private TextMeshProUGUI playerPositionText;
     [SerializeField] private TextMeshProUGUI playerRotationText;
 
@@ -27,28 +27,19 @@ public class GameStatsUI : MonoBehaviour
         Coin.OnCoinCollected += UpdateCoinsAmount;
     }
 
-    
-    void Update()
-    {
-        
-    }
-
     private void UpdateGeneralStats()
     {
-        playerNameText.text = gameManager.playerName;
-        playerLevelText.text = gameManager.playerLevel.ToString();
+        playerHealthText.text = player.health.ToString();
+        playerNameText.text = player.playerName;
+        playerLevelText.text = player.playerLevel.ToString();
     }
 
     private void UpdatePlayerPositionAndRotation()
     {
-        playerHealthText.text = player.health.ToString();
         playerPositionText.text = player.playerPosition.ToString();
         playerRotationText.text = player.playerRotation.ToString();
     }
 
-    private void UpdateCoinsAmount()
-    {
-        coinsAmountText.text = gameManager.coinsAmount.ToString();
-    }
+    private void UpdateCoinsAmount() => coinsAmountText.text = gameManager.coinsAmount.ToString();
 
 }

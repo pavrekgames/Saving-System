@@ -376,8 +376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5234a71e9c3cb441b8216b9fe09a409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: NoName
-  playerLevel: 1
   coinsAmount: 0
 --- !u!1 &184921746
 GameObject:
@@ -1546,10 +1544,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 173750475}
   player: {fileID: 1690519842}
-  playerNameText: {fileID: 1801951378}
-  playerLevelText: {fileID: 31895816}
   coinsAmountText: {fileID: 1809357601}
   playerHealthText: {fileID: 825562238}
+  playerNameText: {fileID: 1801951378}
+  playerLevelText: {fileID: 31895816}
   playerPositionText: {fileID: 1528716015}
   playerRotationText: {fileID: 788038250}
 --- !u!1 &682153197
@@ -3593,6 +3591,7 @@ MonoBehaviour:
   cloud: {fileID: 2075115216}
   fileName: SavingData
   useEncryption: 0
+  loadFromCloud: 0
 --- !u!1 &1527252219
 GameObject:
   m_ObjectHideFlags: 0
@@ -4225,6 +4224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 527289741}
   health: 100
+  playerName: NoName
+  playerLevel: 1
   playerPosition: {x: 0, y: 0, z: 0}
   playerRotation: {x: 0, y: 0, z: 0, w: 0}
   moveSpeed: 5

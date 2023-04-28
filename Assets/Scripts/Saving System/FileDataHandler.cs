@@ -6,7 +6,6 @@ using System.IO;
 
 public class FileDataHandler
 {
-
     private string dirPath = "";
     private string fileName = "";
 
@@ -73,16 +72,16 @@ public class FileDataHandler
                 dataToSave = EncryptDecryptData(dataToSave);
             }
 
-            using(FileStream stream = new FileStream(fullPath, FileMode.Create))
+            using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
-                using(StreamWriter writer = new StreamWriter(stream))
+                using (StreamWriter writer = new StreamWriter(stream))
                 {
                     writer.Write(dataToSave);
                 }
             }
 
         }
-        catch(Exception e) 
+        catch (Exception e)
         {
             Debug.LogError("Error during saving data to file: " + fullPath + "\n" + e);
         }
@@ -94,7 +93,7 @@ public class FileDataHandler
 
         IEnumerable<DirectoryInfo> dirInfos = new DirectoryInfo(dirPath).EnumerateDirectories();
 
-        foreach(DirectoryInfo dirInfo in dirInfos)
+        foreach (DirectoryInfo dirInfo in dirInfos)
         {
             string profileId = dirInfo.Name;
             string fullPath = Path.Combine(dirPath, profileId, fileName);
@@ -107,7 +106,7 @@ public class FileDataHandler
 
             GameData profileData = Load(profileId);
 
-            if(profileData != null)
+            if (profileData != null)
             {
                 profileDictionary.Add(profileId, profileData);
             }
@@ -115,7 +114,6 @@ public class FileDataHandler
             {
                 Debug.LogError("Something went wrong during looading profileId: " + profileId);
             }
-
         }
 
         return profileDictionary;
@@ -125,13 +123,12 @@ public class FileDataHandler
     {
         string modifiedData = "";
 
-        for(int i=0; i < data.Length; i++)
+        for (int i = 0; i < data.Length; i++)
         {
             modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
         }
 
         return modifiedData;
-
     }
 
 }
