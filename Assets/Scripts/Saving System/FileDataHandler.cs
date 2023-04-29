@@ -20,6 +20,7 @@ public class FileDataHandler
         this.useEncryption = useEncryption;
     }
 
+    // Edit this function to load game from other format
     public GameData Load(string profileId)
     {
         string fullPath = Path.Combine(dirPath, profileId, fileName);
@@ -57,6 +58,7 @@ public class FileDataHandler
 
     }
 
+    // Edit this function to save game to other format
     public void Save(GameData data, string profileId)
     {
         string fullPath = Path.Combine(dirPath, profileId, fileName);

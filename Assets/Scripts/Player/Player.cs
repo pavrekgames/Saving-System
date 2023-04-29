@@ -72,6 +72,8 @@ public class Player : MonoBehaviour, ISaveLoadData
 
         player.transform.position = playerPosition;
         player.transform.rotation = playerRotation;
+
+        UpdatePlayerStats();
     }
     #endregion
 }
