@@ -50,7 +50,7 @@ public class FileDataHandler
             }
             catch (Exception e)
             {
-                Debug.LogError("Error during saving data to file: " + fullPath + "\n" + e);
+                Debug.LogError("Error during loading data from file: " + fullPath + "\n" + e);
             }
         }
 
